@@ -47,11 +47,13 @@ func main() {
 		}
 		file := os.Stdout
 		stat, err := file.Stat()
+		var result string
 		if stat.Mode()&os.ModeNamedPipe == os.ModeNamedPipe {
-			file.Write([]byte(fmt.Sprintf("%s\n", *link)))
+			result = fmt.Sprintf("%s\n", *link)
 		} else {
-			file.Write([]byte(fmt.Sprintf("Upload complete. Access it through the following URL: %s\n", *link)))
+			result = fmt.Sprintf("Upload complete. The image is available at: %s\n", *link)
 		}
+		file.Write([]byte(result))
 		return nil
 	}
 	app.Run(os.Args)

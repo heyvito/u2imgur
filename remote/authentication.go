@@ -2,6 +2,7 @@ package remote
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"time"
@@ -48,6 +49,11 @@ func getSessionFromResponse(resp *http.Response) (*config.Session, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	if suc, present := result["success"]; present && suc.(bool) {
+		data := result["data"].(map[string]interface{})
+		return nil, fmt.Errorf("%s", data["error"])
 	}
 
 	t := time.Now().Add(time.Duration(result["expires_in"].(float64)) * time.Second)

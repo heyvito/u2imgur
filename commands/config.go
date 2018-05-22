@@ -48,7 +48,7 @@ var ConfigCommand = cli.Command{
 		}
 		config.SetSession(session)
 		fmt.Println("OK.")
-		fmt.Printf("We just stored your credentials to %s. You're now ready to upload gifs!", config.SessionFile)
+		fmt.Printf("We just stored your credentials to %s. You're now ready to upload images!\n", config.SessionFile)
 		return nil
 	},
 }
